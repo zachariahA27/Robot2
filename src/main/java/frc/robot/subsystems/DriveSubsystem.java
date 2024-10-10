@@ -4,20 +4,31 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
-  private final PWMTalonSRX leftMotor= new PWMTalonSRX(1);
-  private final PWMTalonSRX rightMotor= new PWMTalonSRX(3);
-  private final PWMTalonSRX leftMotor2= new PWMTalonSRX(2);
-  private final PWMTalonSRX rightMotor2= new PWMTalonSRX(4);
+  private final WPI_TalonSRX leftMotor= new WPI_TalonSRX(1);
+  private final WPI_TalonSRX rightMotor= new WPI_TalonSRX(3);
+  private final WPI_TalonSRX leftMotor2= new WPI_TalonSRX(2);
+  private final WPI_TalonSRX rightMotor2= new WPI_TalonSRX(4);
   public DriveSubsystem() {
-    leftMotor.setInverted(true);
+    
+    rightMotor.setInverted(true);
+    rightMotor2.setInverted(true);
   }
 public void tankDrive(double left, double right){
+  leftMotor.set(left);
+  rightMotor.set(right);
+  
+}
+public void arcadeDrive(double y, double x){
+  double left= y+x;
+  double right= y-x;
   leftMotor.set(left);
   rightMotor.set(right);
   leftMotor2.set(left);
