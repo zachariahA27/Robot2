@@ -5,17 +5,20 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
-  private final WPI_TalonSRX leftMotor= new WPI_TalonSRX(1);
-  private final WPI_TalonSRX rightMotor= new WPI_TalonSRX(3);
-  private final WPI_TalonSRX leftMotor2= new WPI_TalonSRX(2);
-  private final WPI_TalonSRX rightMotor2= new WPI_TalonSRX(4);
+  private final WPI_TalonSRX leftMotor= new WPI_TalonSRX(3);
+  private final WPI_TalonSRX rightMotor= new WPI_TalonSRX(1);
+  private final WPI_TalonSRX leftMotor2= new WPI_TalonSRX(4);
+  private final WPI_TalonSRX rightMotor2= new WPI_TalonSRX(2);
+  private AHRS navX = new AHRS(Port.kMXP);
   public DriveSubsystem() {
     
     rightMotor.setInverted(true);
@@ -47,7 +50,9 @@ public void arcadeDrive(double y, double x){
           /* one-time action goes here */
         });
   }
-
+public void resetnavX(){
+  navX.reset();
+}
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
